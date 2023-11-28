@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "cd vike-painless-react/ && pnpm run dev",
+    "build": "cd vike-painless-react/ && pnpm run build",
+    "clean": "git clean -Xdf",
+    "reset": "pnpm run clean && pnpm install && pnpm run build",
+    "release": "cd vike-painless-react/ && pnpm run release",
+    "release:commit": "cd vike-painless-react/ && pnpm run release:commit"
+  },
+  "pnpm": {
+    "overrides": {
+      "vike-painless-react": "link:./vike-painless-react/"
+    }
+  },
+  "packageManager": "pnpm@8.6.12"
+}

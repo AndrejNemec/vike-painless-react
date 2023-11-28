@@ -1,0 +1,77 @@
+{
+  "name": "vike-painless-react",
+  "version": "0.0.36",
+  "type": "module",
+  "main": "./dist/renderer/+config.js",
+  "types": "./dist/renderer/+config.d.ts",
+  "exports": {
+    ".": "./dist/renderer/+config.js",
+    "./renderer/onRenderHtml": {
+      "import": "./dist/renderer/onRenderHtml.js",
+      "types": "./dist/renderer/onRenderHtml.d.ts"
+    },
+    "./renderer/onRenderClient": {
+      "import": "./dist/renderer/onRenderClient.js",
+      "types": "./dist/renderer/onRenderClient.d.ts"
+    },
+    "./core": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "clean": "rimraf dist",
+    "build": "rm -rf dist/ && tsc",
+    "release": "release-me patch",
+    "release:commit": "release-me commit"
+  },
+  "peerDependencies": {
+    "react": "18.x.x",
+    "react-dom": "18.x.x",
+    "vike": "^0.4.147",
+    "vite": "^5.0.2"
+  },
+  "devDependencies": {
+    "@brillout/release-me": "^0.1.9",
+    "@types/invariant": "^2.2.37",
+    "@types/node": "^18.17.18",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "@types/shallowequal": "^1.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.0.1",
+    "typescript": "^5.2.2",
+    "vike": "^0.4.147"
+  },
+  "dependencies": {
+    "invariant": "^2.2.4",
+    "react-fast-compare": "^3.2.2",
+    "shallowequal": "^1.1.0",
+    "react-i18next": "^13.5.0",
+    "i18next": "^23.7.6"
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/renderer/+config.d.ts"
+      ],
+      "core": [
+        "./dist/index.d.ts"
+      ],
+      "renderer/onRenderHtml": [
+        "./dist/renderer/onRenderHtml.d.ts"
+      ],
+      "renderer/onRenderClient": [
+        "./dist/renderer/onRenderClient.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "repository": "https://github.com/AndrejNemec/vike-painless-react",
+  "license": "MIT"
+}
