@@ -3,6 +3,7 @@ import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
 import type { PageContextServer } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 import { HeadContext } from './types'
+import { getScript } from '../theme/ThemeScript'
 
 export const onRenderHtml = async (pageContext: PageContextServer) => {
   const headContext: HeadContext = {} as HeadContext
@@ -20,6 +21,7 @@ export const onRenderHtml = async (pageContext: PageContextServer) => {
   return escapeInject`<!DOCTYPE html>
     <html ${dangerouslySkipEscape(headContext.head?.htmlAttributes ? headContext.head.htmlAttributes.toString() : '')}>
       <head>
+        ${!pageContext.Page ? getScript({}) : ''}
         ${dangerouslySkipEscape(headContext.head?.meta.toString() || '')}
         ${dangerouslySkipEscape(headContext.head?.title.toString() || '')}
         ${dangerouslySkipEscape(headContext.head?.link.toString() || '')}

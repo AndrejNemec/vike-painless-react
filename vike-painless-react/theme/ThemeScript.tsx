@@ -9,9 +9,9 @@ export interface ColorSchemeScriptProps extends React.ComponentPropsWithoutRef<'
   localStorageKey?: string
 }
 
-const getScript = ({
-  defaultColorScheme,
-  localStorageKey
+export const getScript = ({
+  defaultColorScheme = 'light',
+  localStorageKey = 'app-color-scheme'
 }: Pick<ColorSchemeScriptProps, 'defaultColorScheme' | 'localStorageKey'>) =>`try {
   var _colorScheme = window.localStorage.getItem("${localStorageKey}");
   var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "${defaultColorScheme}";

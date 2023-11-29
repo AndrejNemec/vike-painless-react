@@ -20,15 +20,6 @@ export default {
     Layout: {
       env: { client: true, server: true }
     },
-    passToClient: {
-      env: { server: true, client: true }
-    },
-    hydrationCanBeAborted: {
-      env: { server: true, client: true }
-    },
-    onBeforeRenderEnv: {
-      env: { server: true, client: true }
-    },
     renderMode: {
       env: { config: true },
       effect({ configDefinedAt, configValue = 'SSR' }) {
