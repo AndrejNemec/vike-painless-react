@@ -1,6 +1,6 @@
 import React, { ReactNode, createContext, useContext, useEffect, useMemo, useState, useRef } from 'react'
 import { ThemeScript, type ThemeWithAutoType, ThemeType } from "./ThemeScript.js"
-import { getGlobalObject } from '../renderer/utils/getGlobalObject'
+import { getGlobalObject } from '../renderer/utils/getGlobalObject.js'
 
 export type ThemeProviderProps = {
     defaultColorScheme?: ThemeWithAutoType
