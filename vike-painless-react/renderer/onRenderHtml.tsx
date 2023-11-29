@@ -18,16 +18,16 @@ export const onRenderHtml = async (pageContext: PageContextServer) => {
   }
 
   return escapeInject`<!DOCTYPE html>
-    <html ${headContext.head.htmlAttributes.toString()}>
+    <html ${headContext.head?.htmlAttributes ? headContext.head.htmlAttributes.toString() : ''}>
       <head>
-        ${dangerouslySkipEscape(headContext.head.meta.toString())}
-        ${dangerouslySkipEscape(headContext.head.title.toString())}
-        ${dangerouslySkipEscape(headContext.head.link.toString())}
-        ${dangerouslySkipEscape(headContext.head.script.toString())}
-        ${dangerouslySkipEscape(headContext.head.style.toString())}
+        ${dangerouslySkipEscape(headContext.head?.meta.toString() || '')}
+        ${dangerouslySkipEscape(headContext.head?.title.toString() || '')}
+        ${dangerouslySkipEscape(headContext.head?.link.toString() || '')}
+        ${dangerouslySkipEscape(headContext.head?.script.toString() || '')}
+        ${dangerouslySkipEscape(headContext.head?.style.toString() || '')}
       </head>
-      <body ${headContext.head.bodyAttributes.toString()}>
-        ${dangerouslySkipEscape(headContext.head.noscript.toString())}
+      <body ${headContext.head?.bodyAttributes ? headContext.head.bodyAttributes.toString() : ''}>
+        ${dangerouslySkipEscape(headContext.head?.noscript.toString() || '')}
         <div id="${pageContext.config.rootId || 'root'}">${dangerouslySkipEscape(pageHtml)}</div>
       </body>
     </html>`
