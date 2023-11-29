@@ -46,7 +46,7 @@ export const ThemeProvider = ({
                                 children
                               }: ThemeProviderProps) => {
   const [theme, setThemeState] = useState<ThemeWithAutoType>(defaultColorScheme)
-  const [currentTheme, setCurrentTheme] = useState<ThemeType>(theme === 'auto' ? 'light' : theme)
+  const [currentTheme, setCurrentTheme] = useState<ThemeType | undefined>()
 
   const setTheme = useCallback((theme: ThemeWithAutoType, saveToLocalStorage: boolean = true) => {
     setThemeState(theme)
@@ -60,6 +60,9 @@ export const ThemeProvider = ({
   }, [setTheme])
 
   useEffect(() => {
+    if (!currentTheme) {
+      return
+    }
     if (currentTheme === 'light') {
       document.documentElement.classList.add('light')
       document.documentElement.classList.remove('dark')
@@ -89,7 +92,7 @@ export const ThemeProvider = ({
   return (
     <ThemeContext.Provider value={{
       theme,
-      currentTheme,
+      currentTheme: currentTheme || 'light',
       setTheme
     }}>
       <ThemeScript
