@@ -1,5 +1,6 @@
-import React, { ReactNode, createContext, useContext, useEffect, useMemo, useState } from "react"
+import React, { ReactNode, createContext, useContext, useEffect, useMemo, useState, useRef } from 'react'
 import { ThemeScript, type ThemeWithAutoType, ThemeType } from "./ThemeScript.js"
+import { getGlobalObject } from '../renderer/utils/getGlobalObject'
 
 export type ThemeProviderProps = {
     defaultColorScheme?: ThemeWithAutoType
@@ -7,11 +8,13 @@ export type ThemeProviderProps = {
     children?: ReactNode
 }
 
-const ThemeContext = createContext<{
-     setTheme: (theme: ThemeWithAutoType) => void
-     theme: ThemeWithAutoType
-     currentTheme: ThemeType
-}>({} as any)
+const { Context: ThemeContext } = getGlobalObject('ThemeProvider.tsx', {
+    Context: createContext<{
+        setTheme: (theme: ThemeWithAutoType) => void
+        theme: ThemeWithAutoType
+        currentTheme: ThemeType
+    }>({} as any)
+})
 
 export const useColorScheme = () => {
     return useContext(ThemeContext)
@@ -41,8 +44,24 @@ export const ThemeProvider = ({
     localStorageKey = 'app-color-scheme',
     children
 }: ThemeProviderProps) => {
-    const [theme, setThemeState] = useState<ThemeWithAutoType>(getThemeFromStorage(localStorageKey) || defaultColorScheme)
-    const [currentTheme, setCurrentTheme] = useState<ThemeType>(theme === 'auto' ? getSystemTheme() : theme)
+    const [theme, setThemeState] = useState<ThemeWithAutoType>(defaultColorScheme)
+    const [currentTheme, setCurrentTheme] = useState<ThemeType>(theme === 'auto' ? 'light' : theme)
+
+    useEffect(() => {
+        const newTheme = getThemeFromStorage(localStorageKey) || defaultColorScheme
+        setThemeState(newTheme)
+        if (newTheme === 'auto') {
+            setCurrentTheme(getSystemTheme())
+        }
+    }, [])
+
+    useEffect(() => {
+        if (theme === 'auto') {
+            setCurrentTheme(getSystemTheme())
+            return
+        }
+        setCurrentTheme(theme)
+    }, [theme])
 
     useEffect(() => {
         if (currentTheme === 'light') {

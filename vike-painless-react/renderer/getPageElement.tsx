@@ -2,7 +2,7 @@ import React from 'react'
 import { PageContextProvider } from './PageContextProvider.js'
 import type { PageContext } from 'vike/types'
 import { HeadContext } from './types'
-import { HeadProvider } from '../head/index.js'
+import HeadProvider from '../head/Provider.js'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 

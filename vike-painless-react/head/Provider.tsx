@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 
 import HeadData, { isDocument } from './HeadData.js';
 import type { HeadServerState } from './types.d.ts';
+import { getGlobalObject } from '../renderer/utils/getGlobalObject'
 
 const defaultValue = {};
 
-export const Context = React.createContext(defaultValue);
-
+export const { Context } = getGlobalObject('Provider.ts', {
+  Context: React.createContext(defaultValue)
+})
 interface ProviderProps {
   context?: {
     head: HeadServerState;
