@@ -21,7 +21,7 @@ export const onRenderHtml = async (pageContext: PageContextServer) => {
   return escapeInject`<!DOCTYPE html>
     <html ${dangerouslySkipEscape(headContext.head?.htmlAttributes ? headContext.head.htmlAttributes.toString() : '')}>
       <head>
-        ${!pageContext.Page ? getScript({}) : ''}
+        ${dangerouslySkipEscape(!pageContext.Page ? getScript({}) : '')}
         ${dangerouslySkipEscape(headContext.head?.meta.toString() || '')}
         ${dangerouslySkipEscape(headContext.head?.title.toString() || '')}
         ${dangerouslySkipEscape(headContext.head?.link.toString() || '')}
