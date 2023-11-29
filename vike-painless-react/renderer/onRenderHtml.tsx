@@ -18,7 +18,7 @@ export const onRenderHtml = async (pageContext: PageContextServer) => {
   }
 
   return escapeInject`<!DOCTYPE html>
-    <html ${headContext.head?.htmlAttributes ? headContext.head.htmlAttributes.toString() : ''}>
+    <html ${dangerouslySkipEscape(headContext.head?.htmlAttributes ? headContext.head.htmlAttributes.toString() : '')}>
       <head>
         ${dangerouslySkipEscape(headContext.head?.meta.toString() || '')}
         ${dangerouslySkipEscape(headContext.head?.title.toString() || '')}
@@ -26,9 +26,9 @@ export const onRenderHtml = async (pageContext: PageContextServer) => {
         ${dangerouslySkipEscape(headContext.head?.script.toString() || '')}
         ${dangerouslySkipEscape(headContext.head?.style.toString() || '')}
       </head>
-      <body ${headContext.head?.bodyAttributes ? headContext.head.bodyAttributes.toString() : ''}>
+      <body ${dangerouslySkipEscape(headContext.head?.bodyAttributes ? headContext.head.bodyAttributes.toString() : '')}>
         ${dangerouslySkipEscape(headContext.head?.noscript.toString() || '')}
-        <div id="${pageContext.config.rootId || 'root'}">${dangerouslySkipEscape(pageHtml)}</div>
+        <div id="${dangerouslySkipEscape(pageContext.config.rootId || 'root')}">${dangerouslySkipEscape(pageHtml)}</div>
       </body>
     </html>`
 }

@@ -1,6 +1,6 @@
 {
   "name": "vike-painless-react",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "type": "module",
   "main": "./dist/renderer/+config.js",
   "types": "./dist/renderer/+config.d.ts",
