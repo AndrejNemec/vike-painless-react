@@ -3,7 +3,7 @@ import { escapeInject, dangerouslySkipEscape, version } from 'vike/server'
 import type { PageContextServer } from 'vike/types'
 import { getPageElement } from './getPageElement.js'
 import { HeadContext } from './types'
-import { getScript } from '../theme/ThemeScript'
+import { getScript } from '../theme/ThemeScript.js'
 
 export const onRenderHtml = async (pageContext: PageContextServer) => {
   const headContext: HeadContext = {} as HeadContext
